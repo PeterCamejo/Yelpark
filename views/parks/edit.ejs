@@ -1,0 +1,50 @@
+<% layout('../layouts/boilerplate') %>
+	<div class="row">
+		<h1 class="text-center">Edit Park</h1>
+		<div class="col-6 offset-3">
+			<form action="/parks/<%= park._id %>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+				<div class="mb-3">
+					<label class="form-label" for="">Title</label>
+					<input class="form-control" type="text" id="title" name="park[title]" value="<%= park.title%>" required>
+					<div class="valid-feedback">Looking good!</div>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="">Location</label>
+					<input class="form-control" type="text" id="location" name="park[location]" value="<%= park.location%>" required>
+					<div class="valid-feedback">Looking good!</div>
+				</div>
+				<div class="mb-3">
+  					<label for="images" class="form-label">Add more images</label>
+  					<input class="form-control" type="file" id="formFileMultiple" name='image' multiple>
+					<div class="valid-feedback">Looking good!</div>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="price">Park Price</label>
+					<div class="input-group">
+						  <span class="input-group-text" id="price-label">$</span>
+						  <input type="text" class="form-control" placeholder="0.00" aria-label="Amount (to the nearest dollar)" name="park[price]" value="<%= park.price%>" required>
+						  <div class="valid-feedback">Looking good!</div>
+					</div>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="">Description</label>
+					<textarea class="form-control" type="text" id="description" name="park[description]" required><%= park.description%></textarea>
+					<div class="valid-feedback">Looking good!</div>
+				</div>
+				<!-- TODO: Move image deletion/management to its own page -->
+				<div class='mb-3'>
+					<% park.images.forEach(function(img, i){ %>
+						<img src='<%= img.thumbnail %>' class="img-thumbnail" alt="">
+						<div class='form-check-inline'>
+							<input type='checkbox' id='img-<%= i %>' name='deleteImages[]' value='<%= img.filename %>'>
+						</div>
+						<label for='img-<%= i %>'>Delete?</label>
+					<% }) %>
+				</div>
+				<div class="mb-3">
+					<button class="btn btn-success"> Update Park </button>
+				</div>
+				<a href="/parks/<%= park._id %>">Back to Park</a>
+			</form>
+		</div>
+	</div>

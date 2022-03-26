@@ -1,0 +1,24 @@
+<!-- TODO: Add a fancy cluster map to the index page -->
+
+<% layout('../layouts/boilerplate') %>
+	<h1 class='mb-3'> Park Index </h1>
+	<ul>
+		<% for (let park of parks) {%>
+			<div class="card mb-3">
+				<div class="row">
+					<div class="col-md-4">
+						<img class="img-fluid" alt="" src="<%= park.images.length ? park.images[0].url : "https://res.cloudinary.com/thealex117/image/upload/v1648250567/Yelpark/default.jpg" %>">
+					</div>
+					<div class="col-md-8">
+						<div class="card-body">
+							<h5 class="card-title"><%= park.title %></h5>
+							<p class="card-text"><%= park.description %></p>
+							<p class="card-text">
+								<small class="text-muted"><%= park.location %></small>
+							</p>
+							<a class="btn btn-primary" href="/parks/<%=park._id%>">View <%= park.title %></a>
+						</div>								
+					</div>
+				</div>
+			</div>
+		<% } %>
